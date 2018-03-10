@@ -1,0 +1,198 @@
+@media print {
+    body {
+
+    }
+
+    h1 {
+
+    }
+
+    img {
+        float: left;
+    }
+
+    p {
+        font-size: 40px;
+    }
+}
+
+@media (orientation: portrait) {
+    body {
+
+    }
+
+    h1 {
+        width: 100%;
+        margin: auto;
+        text-align: center;
+    }
+
+    img {
+        clear: both;
+        display: block;
+        width: 100%;
+    }
+
+    p {
+
+    }
+}
+
+@media (orientation: landscape) {
+    body {
+
+    }
+
+    h1 {
+
+    }
+
+    img {
+        float: left;
+    }
+
+    p {
+
+    }
+}
+
+@media (height: 500px) {
+    body {
+    }
+
+    h1 {
+
+    }
+
+    img {
+
+    }
+
+    p {
+
+    }
+}
+
+@media (device-width: 500px) {
+    body {
+    }
+
+    h1 {
+
+    }
+
+    img {
+
+    }
+
+    p {
+
+    }
+}
+
+@media (device-height: 500px) {
+    body {
+    }
+
+    h1 {
+
+    }
+
+    img {
+
+    }
+
+    p {
+
+    }
+}
+
+@media screen and (device-aspect-ratio: 16/9) {
+    body {
+    }
+
+    h1 {
+
+    }
+
+    img {
+
+    }
+
+    p {
+
+    }
+}
+
+@media tv {
+    body {
+    }
+
+    h1 {
+
+    }
+
+    img {
+
+    }
+
+    p {
+
+    }
+}
+
+@media screen and (max-width: 960px) {
+    body {
+    }
+
+    h1 {
+
+    }
+
+    img {
+
+    }
+
+    p {
+
+    }
+}
+
+@media screen and (min-width: 961px) and (max-width: 1280px) {
+    body {
+    }
+
+    h1 {
+
+    }
+
+    img {
+
+    }
+
+    p {
+
+    }
+}
+
+@media screen and (min-width: 1281px) {
+    body {
+        margin: auto 10% auto 10%;
+    }
+
+    h1 {
+        width: 100%;
+        margin: auto;
+        text-align: center;
+    }
+
+    img {
+        float: left;
+        display: block;
+        width: 60%;
+    }
+
+    p {
+
+    }
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Web Storage du W3C</title>
+    <meta charset="UTF-8"/>
+    <meta name="Viewport" content="width=device-width"/>
+    <link href="stockage_local.js">
+    <script src="stockage_local.js" type="application/javascript"></script>
+</head>
+<body>
+<h1>Utilisation du DOM localStorage</h1>
+<div>
+    L'<a href="http://www.w3.org/TR/webstorage/">API Web Storage du W3C</a>
+    fournit 2 nouvelles manières pour stocker des informations côté client -
+    les objets <code>sessionStorage</code> et <code>localStorage</code>. Cette démo illustre
+    comment utiliser la fonctionnalité localStorage pour enrgeistrer des informations dans le navigateur
+    sans avoir à utiliser les cookies.
+</div>
+<h2>Exemple de formulaire</h2>
+<p>Essayez de saisir des informations dans le formulaire, puis fermez et rouvrez la page.</p>
+<div>
+    <form action="" method="post" id="infoform">
+        <fieldset name="LocalStorage" id="ls">
+            <legend>Informations personnelles</legend>
+            <p><label id="fnLabel" for="firstName">Prénom: </label>
+                <input id="firstName" name="firstName"/></p>
+            <p><label id="lnLabel" for="lastName">Nom: </label>
+                <input id="lastName" name="lastName"/></p>
+            <p><label id="pclabel" for="postCode">Code postal: </label>
+                <input id="postCode" name="postCode"/></p>
+            <input type="button" value="Enregistrer" onclick="storeLocalContent(
+                    document.querySelector('#firstName').value,
+                    document.querySelector('#lastName').value,
+                    document.querySelector('#postCode').value
+                )">
+            <input type="button" value="Effacer" onclick="clearLocalContent()">
+        </fieldset>
+    </form>
+</div>
+</body>
+</html>

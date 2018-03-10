@@ -1,0 +1,146 @@
+% exercice impair -> Leonard + Basile // pair -> Andrew + Axel
+\chapter{TP2}
+\section{Introduction}
+\lipsum[3-4]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        Exercice 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Etiquette Formulaire} %1
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        Exercice 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Media queries} %2
+Afin de changer l'affichage du menu en une colonne à gauche, qui prend de la place de façon horizontale, en une disposition horizontale au dessus du contenu. La limite pour ce choix sera de 800 pixels.
+On ajoute donc ce code, qu'on détaillera après:
+\begin{itemize}
+\item Pour les écrans supérieur ou égal à 801px
+\begin{minted}[linenos]{css}
+@media screen and (min-width: 801px) {
+  #titrePage {
+    font-size:36pt;
+    font-family:"Times New Roman", Times, serif;
+    background-color:#9999FF
+  }
+  #container {
+    font-size: 16pt;
+    position: relative;
+    width: 100%;
+  }
+
+  #colonneG {
+    width: 200px;
+    height: 100%;
+    float:left;
+  }
+
+  #contenuPage {
+    margin-left: 210px;
+  }
+
+  #footer {
+    border: 2px gray solid;
+    padding: 5pt;
+    margin-top: 5pt;
+  }
+}
+\end{minted}
+
+\item
+\begin{minted}[linenos]{css}
+\item Pour les écrans inférieur ou égal à 800px
+@media screen and (max-width: 800px) {
+  #colonneG{
+    display:inline-block;
+    clear:both;
+    }
+  #colonneG ul li {
+    float:left;
+    list-style-type:none;
+    margin:5px;
+  }
+  #colonneG ul {
+    padding:0;
+  }
+  #titrePage {
+    font-size:36pt;
+    font-family:"Times New Roman", Times, serif;
+    background-color:#e3c773;
+    color:#e8e8e8;
+    text-align:right;
+  }
+}
+\end{minted}
+\end{itemize}
+La partie correspondant aux grands écrans est fourni, il n'est donc pas nécessaire de la détailler. Afin de replacer la colonne de gauche au dessus, on utilise clear:both pour empêcher d'autres éléments de s'afficher à droite et à gauche. On précise float:left sur les éléments de la liste non-ordonnée afin de les afficher en ligne, cela déplace aussi le titre de la colonne, on ajoute display:inline-block afin d'éviter ce phénomène. On aligne le menu à gauche avec padding:0, pour que celui-ci ne gaspille pas la place à gauche. Les puces en face de chaque entrée restent en dépit de leur alignement horizontal, on utilise donc liste-style-type:none afin de les retirer et on rajoute une marge de 5px pour éviter que les éléments apparaissent trop proches les uns des autres. Enfin, on ajuste le titre de la page pour que celui-ci s'aligne à gauche, et soit en gris-blanc sur un fond d'une autre couleur.
+\section{Détection de fonctionnalité} %3
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        Exercice 3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Détection de fonctionnalités} %4
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        Exercice 4
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Stockage Local} %4
+
+Afin de réutiliser les clés de valeur, nous stockons les valeurs dans les clées suivantes :
+\begin{minted}{js}
+var KEY_FIRST_NAME = "firstName";
+var KEY_LAST_NAME = "lastName";
+var KEY_POST_CODE = "postCode";
+\end{minted}
+
+\begin{minted}{js}
+if (window.localStorage.length !== 0) {
+        console.log("Input replace");
+        document.getElementById(KEY_FIRST_NAME).value = window.localStorage.getItem(KEY_FIRST_NAME);
+        document.getElementById(KEY_LAST_NAME).value = window.localStorage.getItem(KEY_LAST_NAME);
+        document.getElementById(KEY_POST_CODE).value = window.localStorage.getItem(KEY_POST_CODE);
+    }
+\end{minted}
+
+Au moment où nous appuyons sur le bouton `Enregistrer` du formulaire la function \mintinline{js}{function storeLocalContent(fName, lName, pCode)} sera appeler comme le stipule la ligne html suivante :
+\begin{minted}{html}
+<input type="button" value="Enregistrer" onclick="storeLocalContent(
+                   document.querySelector('#firstName').value,
+                   document.querySelector('#lastName').value,
+                   document.querySelector('#postCode').value
+               )">
+\end{minted}
+
+
+Afin de vider le stockage local nous ajoutons la fonction `clearLocalContent` qui permettra de supprimer les données rajouter dans le stockage local.
+Pour ne pas interférer avec d'autre script qui peuvent aussi utiliser le stockage local, nous n'utiliserons pas la function `clear()` mais nous supprimerons tous les éléments clés utilisé uniquement dans ce script.
+
+\begin{minted}[linenos]{js}
+function clearLocalContent() {
+    //window.localStorage.clear(); // Suppression des autres clés utilisés par d'autres scripts donc attention
+    window.localStorage.removeItem(KEY_FIRST_NAME);
+    window.localStorage.removeItem(KEY_LAST_NAME);
+    window.localStorage.removeItem(KEY_POST_CODE);
+}
+\end{minted}
+Cette fonction est appelé quand nous appuyons sur le bouton "Effacer" comme nous le stipule la ligne HTML ci-dessous :
+
+Afin de lancer le script d'initialisation nous pouvons soit ajouter le lien vers le script à la fin du body, soit en remplacant la ligne \mintinline{window.onload=} par :
+\begin{minted}
+document.addEventListener('DOMContentLoaded', function() {
+    initialize();
+});
+\end{minted}
+
+Ainsi en ayant enregistrer le formulaire nous pouvons au rechargement de la page voir se ré-afficher les données du formulaire.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        Exercice 5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Géopositionnement} %5
+Le fichier html fournit est censé afficher les données géographiques de l'utilisateur qui accède à la page.
+Le code du fichier JavaScript qui est proposé permet de déterminer grâce à modernizr si le navigateur supporte certaines fonctionnalités.
+
+\section{Conclusion}
+%À travers ces 5 exercices, nous en avons découvert un peu sur la création de contenu réactif et adapté aux supports variés qui peuvent maintenant accéder a Internet. L'ajout de contenu multimédia comme les images ou les vidéos permet de bien accompagner le contenu textuel d'un site web, tandis que l'utilisation des informations géographiques peut permettre d'offrir un contenu plus personnalisé si le site offre des services locaux.

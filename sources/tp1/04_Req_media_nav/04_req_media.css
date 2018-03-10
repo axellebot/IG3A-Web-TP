@@ -1,0 +1,49 @@
+/*petits ecran*/
+@media screen and ( max-width: 800px ) {
+	/*affiche le petit menu et pas le grand*/
+	.petit-menu { display: inline; }
+
+	.grand-menu { display: none; }
+
+	.contenu: { width: 100%; }
+	/* met le texte en dessous de la liste*/
+}
+
+/*ecran moyem*/
+@media screen and ( min-width: 801px ) and ( max-width: 1024px ) {
+
+	/*N'affiche pas le petit menu*/
+	.petit-menu { display: none; }.
+
+	/*Affiche le grand menu et prend toute la largeur. Est donc au dessus du texte*/
+	.grand-menu {
+		display:inline;
+		width: 100%;
+		}
+	/*indique qu'on ne veut pas une liste vertical*/
+	.grand-menu ul { list-style-type: none; }
+	/*Affiche les options a la suite sur une seul ligne*/
+	.grand-menu ul li { display: inline; }
+
+	/* met le texte en dessous de la liste*/
+	.contenu: { width: 100%; }
+}
+
+/*grand ecran*/
+@media screen and ( min-width: 1025px ) {
+	/*Cache le petit menu*/
+	.petit-menu { display: none; }
+
+	/*Affiche le grand menu et le fait flotter 0 gauche en le laissant avoir des element a sa droite*/
+	.grand-menu {
+		display: inline;
+		float: left;
+		width: 20%; /*Laisse 80% de place en largeur pour le texte*/
+		}
+
+	/*Met le texte sur le cote gauche et prend les 80% de place laisse par le menu*/
+	.contenu{
+		float: right;
+		width: 80%;
+		}
+}

@@ -1,0 +1,32 @@
+article {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+.un {
+    background-color: #333;
+    min-width: 500px;
+    float: left;
+}
+
+.deux {
+    background-color: #666;
+    max-width: 300px;
+    float: left;
+}
+
+.trois {
+    background-color: #ccc;
+    max-width: 300px;
+    float: left;
+}

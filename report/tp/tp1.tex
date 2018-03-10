@@ -1,0 +1,230 @@
+% exercice pair -> Leonard + Basile // impair -> Andrew + Axel
+
+\chapterimage{./Pictures/cover-cobweb}
+\chapter{TP1}
+\section{Introduction}
+Les sites internet sont téléchargés puis affichés à l'utilisateur par les navigateurs internet en interprétant les langages HTML et CSS.
+
+\begin{itemize}
+\item HTML signifie HyperText Markup Language : Permet de partitionner le contenu d'une page web.
+\item CSS signifie Cascade Style Sheet : Permet d'agencer le contenu d'une page web.
+\end{itemize}
+
+Nous verrons lors de ce TP les utilisations basiques de ces langages.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        Exercice 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Images fluides}
+L'affichage d'image permet parfois de récapituler des idées, de les illustrer ou même simplement de décorer un site web. Chaque support dispose d'une taille d'écran unique, ainsi, afficher une image d'une taille fixée (en pixels) n'est pas une bonne idée si on veut que celle-ci s'affiche de manière similaire sur tout les appareils. Si une image de 800x600px apparaîta commeassew grande sur un écran de 1024x768px, elle apparaîtra gigantesque sur un terminal de 320x200px ou ridiculement petite sur un écran en 1440p. C'est pourquoi on choisit d'afficher les images en fonction d'un certain pourcentage de la largeur de l'écran. Dans l'exemple, on décide d'afficher le texte sur les 60 premiers pourcents de l'écran, puis d'afficher l'image sur les 40 derniers pourcents. Au premier essai, en mettant simplement:
+\begin{minted}{css}
+div.img-wrap{
+	float:right;
+	width:40%;
+}
+\end{minted}
+L'image se met effectivement à droite du texte, mais elle dépasse largement de l'écran. On rajoute donc une classe "responsive", qu'on attribue a la balise img contenant l'image:
+\begin{minted}{css}
+.responsive{
+  max-width: 100%;
+  height: auto;
+}
+\end{minted}
+Ainsi, l'image est limitée à 100% de la taille du div contenant l'image. Celui-ci étant limité à 40%, l'image sera donc redimensionnée pour tenir dans cette espace. On ajoute height:auto de façon redondante pour préciser la taille supposée de l'image.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        Exercice 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Videos fluides}
+Dans cet deuxième exercice du TP. Le but est d'obtenir un affichage interactif d'une vidéo sur une page web.\\
+En HTML deux type de balises sont disponibles pour réaliser cet action.\\
+En premier lieu nous avons la balise <video> qui permet d'afficher un fichier vidéo présent sur l'ordinateur sur la page web, et ceci depuis n'importe quelle répertoire.\\
+
+La deuxième méthode consiste à ajouter une vidéo déjà présente sur internet et ceux grâce à son URL. Pour cela on utilise une balise différente nommé <iframe>. Cet balise recherche l'URL de la vidéo afin de redirigé l'affichage sur notre page web.\\
+
+Dans le code on peut voir ici la balise iframe, ce qui indique l'ajout de la vidéo via le web.
+\begin{minted}[linenos]{html}
+<div class="video-wrap">
+	<iframe src="https://www.youtube.com/embed/vI6as6rumJk" width="500" height="281" frameborder="0" autoplay="none"></iframe>
+</div>
+\end{minted}
+
+Chaque vidéo peut être lu tel quel, cependant on peut aussi choisir de modifier la taille de sa fenêtre par exemple. C'est le cas ici. Pour cela on utilise deux instructions qui sont "width" et "height" , respectivement pour la longueur et la hauteur de la fenêtre en pixel. Il faut faire attention à ne pas négliger la taille réel de la vidéo.\\
+Chaque instruction ou balise doit être placé dans une balise <div>. Celle ci permet de créer des divisions d'exécution. L'idée est d'ainsi de mettre une balise \mintinline{html}{<div>} autour des instructions de tailles également.
+
+\begin{minted}[linenos]{html}
+<video src="media/speaker.mp4" controls></video>
+\end{minted}
+
+Ici il s'agit du même principe, excepté le fait que l'ont utilise une balise <video> dans le sac.\\
+Par ailleurs, on remarque l'utilisation dans les deux cas précédent d'une balise portant l'intitulé "contrôle".\\
+Cette balise permet d'accéder aux fonctionnalités de base tel que la lecture  la pause et autre.\\
+
+En ce qui concerne le css, on peut visuellement remarquer plusieurs parties.\\
+Une première parti qui a pour but de gérer l'espace occupé par la vidéo. Il s'agit du \mintinline{css}{.video-wrap iframe} pour une vidéo web ou bien \mintinline{css}{.video-wrap video} si elle provient d'un espace de l'ordinateur. Ces balises ordonne la vidéo de telle sorte qu'elle prenne toute la place disponible.\\
+
+Une fois la vidéo géré sur la page web, on peut géré la vidéo à l'intérieur de sa propre fenêtre. C'est la partie \mintinline{css}{.video-wrap} qui permet ceci. Son utilisation est fréquentes.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        Exercice 3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Redimension des images et requêtes media}
+Les requêtes \mintinline{css}{media} permettent de conditionner l'affichage suivant les médias (écran, appareil, affichage ...).\\
+Dans le fichier CSS nous pouvons ainsi spécifier plusieurs taille d'affichage :
+\begin{itemize}
+  \item Ecran taille <= 1024px
+  \begin{minted}{css}
+    @media screen and (max-width: 1024px) {
+  \end{minted}
+  \item Ecran 1025px <= taille <= 1280px
+  \begin{minted}{css}
+    @media screen and (min-width: 1025px) and (max-width: 1280px) {
+  \end{minted}
+  \item Ecran 1081px <= taille
+  \begin{minted}{css}
+    @media screen and (min-width: 1281px) {
+  \end{minted}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        Exercice 4 %Done
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Navigation adaptative avec des requetes media}
+Dans cette partie, nous allons voir comment adapter efficacement la mise en page d'une page web. Ici, nous adapterons la page par rapport a la largeur de l'écran de l'utilisateur. Pour chaque catégorie de largeur d'écrans, on donnera des attribut différents aux éléments de la page.
+
+Comme dans la partie precedente, nous allons utiliser des requetes media. Les ecrans des utilisateurs seront categorisés en trois categories en fonction de leurs largeurs:
+\begin{itemize}
+\item moins de 800 pixels
+\item entre 801 et 1024 pixels
+\item plus de 1025 pixels
+\end{itemize}
+
+Avec un écran très large, on peut faire plusieurs colonnes et mettre le menu sous forme de liste à puces  sur la gauche de la page.  La requête media permet de ne selectionner que les écrans de plus de 1024 pixels. Pour la liste à puces, le grand menu, on met son display en "left" et sa largeur a 20%. Le contenu occupe alors les 80% restant et est mis en "float right". Le "float" permet d'aligner un élément sur la droite, la gauche ou le milieu de son élément parent. Ici, les deux float differents permettent d'être sûr que le contenu et le menu soit bien alignés. Le "display:none" permet de cacher le petit menu, inutile ici.
+
+Style utilisé pour les écrans larges:
+\begin{minted}[linenos]{css}
+@media screen and ( min-width: 1025px ) {
+	.petit-menu { display: none; }
+	.grand-menu {
+		display: inline;
+		float: left;
+		width: 20%; /*Laisse 80% de place en largeur pour le texte*/
+		}
+	.contenu{
+		float: right;
+		width: 80%;
+		}
+}
+\end{minted}
+
+Pour un écran moins large, on utilise un affichage en liste à puces, mais cette fois, en ligne et en tête de page. Un tel affichage permet de gagner de la place en largeur. L'écran reste tout de même suffisemment large pour que le menu ne prenne pas plus d'une ligne.\\
+Au niveau du code, on utilise une requête media pour etre utilise si l'écran a une largeur entre 801 et 1024 pixels. Comme sur l'écran large, le petit menu n'est pas affiché grâce a l'attribut "display". Pour le grand menu, qui doit être affiché en une ligne en en-tête, on met son display en inline et prend toute la largeur. On désactive l'attribut "list-style-type" de la balise <ul>, ce qui permet de manipuler des balises <li> comme des "blocs". Néanmoins, nous tranformont les balises <li> en "inline" pour qu'il n'y ait pas de retour à la ligne.
+
+Style utilisé pour les écrans moyens:
+\begin{minted}[linenos]{css}
+@media screen and ( min-width: 801px ) and ( max-width: 1024px ) {
+	.petit-menu { display: none; }
+	.grand-menu {
+		display:inline;
+		width: 100%;
+		}
+	.grand-menu ul { list-style-type: none; }
+	.grand-menu ul li { display: inline; }
+	.contenu: { width: 100%; }
+}
+\end{minted}
+
+Pour la plus petite catégorie d'écran, on utilise une liste déroulante placée au dessus du texte. C'est la solution la plus réduite pour placer un menu. Mais cette taille a un coût pour l'utilisateur : deux cliques / tapes du doigts seront necessaires pour utiliser ce menu.  Dans la feuille de style CSS, on applique simplement ce qu'il vient d'être vu : on cache le grand menu, le contenu prend toute la place qu'il peut et le petit menu est affiché. Mettre le petit menu en "block" ou "inline" n'influence pas sur le résultat final.
+
+Style utilisé pour les petits écrans:
+\begin{minted}[linenos]{css}
+@media screen and ( max-width: 800px ) {
+	.petit-menu { display: inline; }
+	.grand-menu { display: none; }
+	.contenu: { width: 100%; }
+}
+\end{minted}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        Exercice 5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Minimum et Maximum}
+Afin de rendre le site plus compact et plus reactif, nous faisons floater nos trois élément à gauche et nous appliquons un taille maximum au deux dernier élément pour les afficher les un à la suite des autres sans que l'élément deux et trois empietent sur leur placement mutuel.
+
+Des propriétés CSS nous permettent de borner la taille d'un element HTML :
+\begin{itemize}
+\item \mintinline{css}{min-width} et \mintinline{css}{max-width}
+\item \mintinline{css}{min-height} et \mintinline{css}{max-height}
+\end{itemize}
+
+Nous souhaitons limiter uniquement la largeur de nos éléments HTML, ainsi nous ajoutons le code suivant aux classes deux et trois :
+\begin{minted}{css}
+max-width: 300px;
+float: left;
+\end{minted}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        Exercice 6
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Controler la mise en page avec un padding relatif}
+Dans une page web, il est parfois nécessaire et utile de placer des espaces vides entres ou dans certains éléments. Ces espaces peuvent être manipule via les attribut "margin" et "padding" en CSS. Le margin sert a ajouter un espace vide en dehors de la bordure de l’élément. Au contraire, le padding permet de placer un espace blancs entre le contenu de l’élément et sa bordure. Ces deux attribut peuvent avoir des longueur d’espaces blancs différentes dans chaque directions, généralement exprimées avec des valeurs s’adaptant a l’affichage de l’utilisateur (em, pourcentages, etc...).
+\\\\
+Dans la page web étudiée ici, nous allons utiliser le padding afin de rendre plus lisible un espace de commentaires. Ici, nous utiliserons la forme de padding ou nous explicitons les quatre valeur de padding, mais il est important de savoir que d’autre manière d’écrire le padding existent afin de factoriser la feuille de style. Lorsqu’on utilise l’écrire non factorisée, il peut être difficile de retenir l’ordre des valeur a mettre: haute, droite, bas, et gauche. Pour les retenir plus simplement, on peut se dire qu’on suit l’aiguille du montre.
+\\\\
+Dans un espace commentaire, les utilisateurs se répondent entre eux, des commentaires sont donc imbrique les uns dans les autres. Lorsque nous avons un affichage d’élément imbrique les uns dans les autres avec une hiérarchie, pouvoir immédiatement identifier les hiérarchies supérieures est très important pour les utilisateurs. Ici, nous utilisons le padding afin de mettre une marge a sur le cote gauche. Comme chaque commentaire possède une marge a sa gauche, tous les commentaire de hiérarchie inférieures seront décalés et ainsi de suite. Pour l’affichage des commentaires, nous avons utilise le padding ci-dessous. Vous pourez remarquer que nous avons exprime trois longueurs en pixels, ce qui est déconseille comme expliquer plus haut. Cependant, ces trois valeurs de padding ne servent qu’a écarter legerement les lignes des bordures des commentaires, nous pouvons donc nous permettre d’utiliser des pixel, unité de mesure fine.
+\\\\
+Padding utilisé pour les commentaires
+\begin{minted}[linenos]{css}
+.commentaire{
+	padding: 8px 2px 2px 2em;
+}
+\end{minted}
+Les attributs "padding" et "margin" permettent généralement d’espacer les éléments, et ainsi, rendent la page plus facile et agréable a lire pour l’utilisateur. Ces notions est donc très importante a maîtriser dans le développement web.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        Exercice 7
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Tous terminaux}
+L'accès à Internet est possible depuis une multitude d'appareils différents, il est ainsi parfois nécessaire de préciser un style différent pour certains appareils particuliers qui présente une interface inhabituelle ou moins pratique qu'une souris et un clavier. Par exemple, une télévision dont le seul moyen d'interaction est une télécommande qui répond lentement et n'est pas ergonomique, risque de décourager un utilisateur d'utiliser un site web. On va donc identifier le medium utilisé et s'adapter.
+\begin{minted}{css}
+@media (orientation: portrait){
+  h1{
+    width:100%;
+    margin: auto;
+    text-align:center;
+  }
+  img{
+    clear:both;
+    display:block;
+    width:100%;
+  }
+}
+@media (orientation: landscape){
+  img{
+    float:left;
+  }
+}
+\end{minted}
+Pour l'orientation portrait, on place le titre au milieu, mais on met aussi le titre sous l'image plutôt qu'à côté pour tirer parti de l'espace vertical. En paysage, on aligne les deux pour utiliser l'espace horizontale et donner un rendu plus naturel.
+\begin{minted}{css}
+@media screen and (min-width:1281px){
+  body{
+    margin: auto 10% auto 10%;
+  }
+  h1{
+    width:100%;
+    margin: auto;
+    text-align:center;
+  }
+  img{
+    float:left;
+    display:block;
+  }
+}
+\end{minted}
+Pour les écrans de plus de 1280px de large, on centre le contenu en laissant une marge pour ne pas forcer l'utilisateur à trop bouger les yeux pour lire le contenu. On met aussi le texte et l'image sur une même ligne pour garder le défilement au minimum.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        Conclusion
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusion}
+À travers ces 7 exercices, nous en avons découvert un peu sur la création de contenu réactif et adapté aux supports variés qui peuvent maintenant accéder a Internet. L'ajout de contenu multimédia comme les images ou les vidéos permet de bien accompagner le contenu textuel d'un site web, et il est important d'adapter ce contenu au support. L'adaptation de la taille des images et de la disposition des sites web permet de rendre le contenu plus accessible et beaucoup plus facile d'accès (comme sur les téléphone mobile par exemple).

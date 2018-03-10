@@ -1,0 +1,16 @@
+.contenu {
+	/*place un espace a droite et a gauche du contenu*/
+	padding: 0 5% 0 5%;
+}
+
+aside {
+	/*Ecarte les commentaire des bords du contenu*/
+	padding: 0 10% 0 30%;	
+}
+
+.commentaire {
+	/*Met une belle mise en page pour que les commentaires s'auto indente*/
+	padding: 8px 2px 2px 2em;
+	background-color: #ccc;
+	border: 1px solid #333;
+}
