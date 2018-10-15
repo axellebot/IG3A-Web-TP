@@ -1,13 +1,30 @@
 % exercice impair -> Leonard + Basile // pair -> Andrew + Axel
 \chapter{TP2}
 \section{Introduction}
-\lipsum[3-4]
-
+Dans le cas de l'approfondissement des connaissances sur le devellopement Web et ce qui y est rattaché, nous avons effectué un deuxième TP composé lui aussi d'une série d'exercice qui ont pour but de travailler des exemples utiles. La spécification propre à tous ces exercices est qu'il s'agit de devellopement Web pour à but d'utilisation sur les terminaux mobiles. Dans un premier temps, nous verrons comment adapter une page HTML suivant la taille du terminale, ceci en se basant sur divers exemple tel que l'utilation de formulaire mais aussi dans le cas de page d'information classique. Suite à ça, nous travaillerons sur la définition de fonctionnalité avec l'utilisation du java script, tout en prétant attention aux utilisations coté serveur/client. Après quoi nous verrons quelques bases sur le stockage local pour terminaux mobile.\\
+Et pour finir, nous ferrons un point sur la géolocalisation qui est aujourd'hui présente sur tout les smartphones et utilisé par beaucoup d'application et de page web.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %        Exercice 1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Etiquette Formulaire} %1
+\section{Etiquette Formulaire}
+Après ouverture du fichier html, je créer un fichier css. On ajoute ensuite les quelques lignes précisé dans la diapo.
+\begin{itemize}
+\item \mintinline{css}{h1 {font-size: 18pt;}} ici, il s'agit uniquement de définir une taille et un type de police pour les balise "h1"
+\item \mintinline{css}{width: 100px;}, cela correspond à une largeur de 100 pixels pour le blocs d'instruction dans le quel est compris le "width"
+\item \mintinline{css}{text-align: right;} cette instruction force l'allignement du texte par la droite.
+\item \mintinline{css}{display: inline-block;} Ici le display inline block permet une boite de bloc principale ainsi que plusieurs boîtes en ligne en suivant.
+\item \mintinline{css}{vertival-align: baseline} pour ce cas, il s'agit uniquement de l'alignement vertical des blocs qui suivent.
+\end{itemize}
+
+Afin de permettre de changer l'affichage sur les écrans de moins de 480px, nous ajoutons quelque ligne sur le css.
+En premier lieu, avec l'instruction @media screen, on précise que les instructons qui vont suivre s'applique uniquement pour les média qui dispose d'une écran.
+En précisant le \mintinline{css}{and (max-width: 480px)} on affine notre choix on précisant les médias qui dispose d'un écran de taille max = 480px.
+Suite à ça, la ligne \mintinline{css}{.col-25, .col-75} permet une répartition en pourcentage de l'espace qui sera occupé sur l'écran. À raison de 25% et 75% ici.
+Les deux lignes qui suivent, sont une précision concernant la largeur maximun à utilisé ainsi que "margin-top" qui affecte un espace nul avec la marge du haut.
+
+Après avoir affiché le fichier HTML dans le navigateur, on remarque une changement sur la disposition vue au préalable. En effet suivant la taille de la fenêtre ouverte, on remarque que les étiquettes sont affichées ou non au dessus des champs du formulaire. Ceci est dû aux commande du css rajouté plus tôt.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %        Exercice 2
@@ -15,8 +32,7 @@
 \section{Media queries} %2
 Afin de changer l'affichage du menu en une colonne à gauche, qui prend de la place de façon horizontale, en une disposition horizontale au dessus du contenu. La limite pour ce choix sera de 800 pixels.
 On ajoute donc ce code, qu'on détaillera après:
-\begin{itemize}
-\item Pour les écrans supérieur ou égal à 801px
+ Pour les écrans supérieur ou égal à 801px
 \begin{minted}[linenos]{css}
 @media screen and (min-width: 801px) {
   #titrePage {
@@ -47,10 +63,10 @@ On ajoute donc ce code, qu'on détaillera après:
   }
 }
 \end{minted}
+La partie correspondant aux grands écrans est fourni, il n'est donc pas nécessaire de la détailler. Celle-ci s'assure juste de créer une colonne à gauche avec le menu, pour faciliter l'accès à celui-ci. On laisse une marge sur le contenu pour l'aérer, et profiter de l'espace.\\
+Pour les écrans inférieur ou égal à 800px
 
-\item
 \begin{minted}[linenos]{css}
-\item Pour les écrans inférieur ou égal à 800px
 @media screen and (max-width: 800px) {
   #colonneG{
     display:inline-block;
@@ -61,6 +77,9 @@ On ajoute donc ce code, qu'on détaillera après:
     list-style-type:none;
     margin:5px;
   }
+  \end{minted}
+   Afin de replacer la colonne de gauche au dessus, on utilise clear:both pour empêcher d'autres éléments de s'afficher à droite et à gauche. On précise float:left sur les éléments de la liste non-ordonnée afin de les afficher en ligne, cela déplace aussi le titre de la colonne, on ajoute display:inline-block afin d'éviter ce phénomène.
+  \begin{minted}[linenos]{css}
   #colonneG ul {
     padding:0;
   }
@@ -73,14 +92,24 @@ On ajoute donc ce code, qu'on détaillera après:
   }
 }
 \end{minted}
-\end{itemize}
-La partie correspondant aux grands écrans est fourni, il n'est donc pas nécessaire de la détailler. Afin de replacer la colonne de gauche au dessus, on utilise clear:both pour empêcher d'autres éléments de s'afficher à droite et à gauche. On précise float:left sur les éléments de la liste non-ordonnée afin de les afficher en ligne, cela déplace aussi le titre de la colonne, on ajoute display:inline-block afin d'éviter ce phénomène. On aligne le menu à gauche avec padding:0, pour que celui-ci ne gaspille pas la place à gauche. Les puces en face de chaque entrée restent en dépit de leur alignement horizontal, on utilise donc liste-style-type:none afin de les retirer et on rajoute une marge de 5px pour éviter que les éléments apparaissent trop proches les uns des autres. Enfin, on ajuste le titre de la page pour que celui-ci s'aligne à gauche, et soit en gris-blanc sur un fond d'une autre couleur.
-\section{Détection de fonctionnalité} %3
+
+
+ On aligne le menu à gauche avec padding:0, pour que celui-ci ne gaspille pas la place à gauche. Les puces en face de chaque entrée restent en dépit de leur alignement horizontal, on utilise donc liste-style-type:none afin de les retirer et on rajoute une marge de 5px pour éviter que les éléments apparaissent trop proches les uns des autres. Enfin, on ajuste le titre de la page pour que celui-ci s'aligne à gauche, et soit en gris-blanc sur un fond d'une autre couleur.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %        Exercice 3
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Détection de fonctionnalités} %4
+\section{Détection de fonctionnalités}
+Après avoir récupéré les fichiers disponibles, j'ajoute le chemin vers la librairie Modernizr ainsi que la balise \mintinline{html}{<html class="no-js">}. Ceci a pour but de pouvoir utiliser les options java script qui seront plus tard utilisée.
+Je créer et inclue un nouveau fichier java script que je nomme \mintinline{html}{detection_de_fonctionnalité.js}.
+Dans ce java script on ajoute plusieur ligne avec l'instruction \mintinline{js}{document.querySelector} Cet méthode fonctionne de manière simple. Elle retourne le premier element dans le document en question qui correspont au selecteur passé en paramètre. Si rien n'est trouvée, la méthode renvois null.
+Le code en question ( mettre un screen, c'est la première question) test les différentes fonctionnalités lié a la méthode "document.querySelector". Ici on test plus particulièrement la prise en charge de geoloc,touch, svg et canvas. Par rapport a ça, un message est renvoyé qui indique l'état sur la prise en charge.
+Suite à ça, on ajoute un fichier css, que l'on nomme \mintinline{html}{detection_de_fonctionnalité.css} dans le quel on implemente le code de l'énoncé.
+Ce code fonctionne de manière très simple. Prenons une ligne pour exemple.
+\mintinline{css}{.animtest, .noanimtest {display: none;}} Ici nous avons les instructions .animtest et .noanitest qui sont des futurs paramètre pour la méthode display. Ensuite il y a la méthode display qui en fonction de l'instruction mis en paramètre derrière aura différent rôle sur les instructions précédentes.
+Les 3 lignes fonctionnent de manière identique.
+Le \mintinline{css}{display: none;} permet de rendre visible tout ce que est concerné par l'affichage avant le display.
+Et ici, le display block permet de forcer un élément à générer une boîte de bloc principale.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %        Exercice 4
@@ -126,8 +155,8 @@ function clearLocalContent() {
 \end{minted}
 Cette fonction est appelé quand nous appuyons sur le bouton "Effacer" comme nous le stipule la ligne HTML ci-dessous :
 
-Afin de lancer le script d'initialisation nous pouvons soit ajouter le lien vers le script à la fin du body, soit en remplacant la ligne \mintinline{window.onload=} par :
-\begin{minted}
+Afin de lancer le script d'initialisation nous pouvons soit ajouter le lien vers le script à la fin du body, soit en remplacant la ligne \mintinline{js}{window.onload=} par :
+\begin{minted}{js}
 document.addEventListener('DOMContentLoaded', function() {
     initialize();
 });
@@ -135,12 +164,55 @@ document.addEventListener('DOMContentLoaded', function() {
 
 Ainsi en ayant enregistrer le formulaire nous pouvons au rechargement de la page voir se ré-afficher les données du formulaire.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%        Exercice 5
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Géopositionnement} %5
-Le fichier html fournit est censé afficher les données géographiques de l'utilisateur qui accède à la page.
-Le code du fichier JavaScript qui est proposé permet de déterminer grâce à modernizr si le navigateur supporte certaines fonctionnalités.
+%%%%%%%%%%%%%%%%%%%%%%%%
+%Exo 5: Geolocalisation
+%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Géolocalisation}
+Dans ce dernier exercice nous allons utiliser et manipuler un peu plus en détail la librairie "Modernizr.js". Comme dit dans le titre, nous allons principalement utiliser les fonctionnalités de geolocalisation et afficher certaines informations sur la page html.
 
+Comme vu dans l'exercice trois de ce TP, il est necessaire que l'utilisateur autorise l'utilisation de la géolocalisation. Dans le cas ou la géolocalisation ne fonctionne pas, la fonction \mintinline{js}{geoError()} affiche à l'utilisateur une boite de dialogue lui indiquant pourquoi la géolocalisation ne fonctionne pas. Ci-dessous nous pouvons voir la fonction \mintinline{js}{geoSuccess()}, qui donne des valeurs à des balises span du code HTML de la base pour afficher les informations de géolocalisation. La variable \mintinline{js}{positionInfo} est une structure de donnée, tout comme les parametre de la fonction \mintinline{js}{calculDistance()}, à l'avant derniere ligne de code. Cette initialisation de variable, très peu utilisé dans les langage plus courrant tel que le Java ou le C, permet de ne pas sauvegarder la variable en mémoire , puisque utiliser une seule fois dans le code. Pour accéder aux variables contenu dans la structure, on pourra par exemple écrire \mintinline{js}{nomStruc.latitude}, où nomStruct est le nom du paramètre dans la fonction \mintinline{js}{calculDistance()}.
+
+\begin{minted}[linenos]{js}
+function geoSuccess(positionInfo) {
+	document.getElementById("longitude").innerHTML = positionInfo.coords.longitude;
+	document.getElementById("latitude").innerHTML = positionInfo.coords.latitude;
+	document.getElementById("precision").innerHTML = positionInfo.coords.accuracy;
+	document.getElementById("altitude").innerHTML = positionInfo.coords.altitude;
+	document.getElementById("precisionAltitude").innerHTML = positionInfo.coords.altitudeAccuracy;
+	document.getElementById("cap").innerHTML = positionInfo.coords.heading;
+	document.getElementById("vitesse").innerHTML = positionInfo.coords.speed;
+	document.getElementById("distance").innerHTML = calculDistance(
+			{latitude : positionInfo.coords.latitude ,
+			 longitude : positionInfo.coords.longitude },
+			{latitude : 47.3121519, /*Position de l'esirem*/
+			 longitude : 5.0039326 });
+}
+\end{minted}
+
+Les deux fonctions précédemment vu sont passé en paramètre à une seule fonction : \mintinline{js}{getLocation()}. qui les appellera si il y a succes ou si il y a erreur. Ce sont des "callback".
+\begin{itemize}
+  \item Si la géolocalisation est pris en charge, on utilise la fonction \mintinline{js}{geoSuccess()}.
+  \item Si la géolocalisation n'est pas prise en charge on utilise la fonction \mintinline{js}{geoError()}.
+\end{itemize}
+
+\begin{minted}[linenos]{js}
+function getLocation() {
+	if (Modernizr.geolocation) { //Envoie true si geoLocation est supporte
+		navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
+	}
+}
+\end{minted}
+
+La fonction \mintinline{js}{getLocation()} est appelée au chargement de la page à l'aide de l'affectation de \mintinline{js}{windows.onload}.
+\begin{minted}[linenos]{js}
+window.onload = getLocation();
+\end{minted}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%Conclusion
+%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
-%À travers ces 5 exercices, nous en avons découvert un peu sur la création de contenu réactif et adapté aux supports variés qui peuvent maintenant accéder a Internet. L'ajout de contenu multimédia comme les images ou les vidéos permet de bien accompagner le contenu textuel d'un site web, tandis que l'utilisation des informations géographiques peut permettre d'offrir un contenu plus personnalisé si le site offre des services locaux.
+À travers ces 5 exercices, nous en avons découvert un peu sur la création de contenu réactif et adapté aux supports variés qui peuvent maintenant accéder a Internet. L'ajout de contenu multimédia comme les images ou les vidéos permet de bien accompagner le contenu textuel d'un site web, tandis que l'utilisation des informations géographiques peut permettre d'offrir un contenu plus personnalisé si le site offre des services locaux.
+Dans ces travaux pratiques, nous avons pus apprendre à utiliser le javascript et récupérer quelques données, tel que la position de l'utilisateur. Avec le javascript, il est possible de modifier le contenu de la page de facon dynamique, et sans retour serveur, le javascript est par conséquent un langage important pour cerner les bases du dévelopement web. Avec ce TP, nous avons pus constater que le javascript est un langage ne compilant pas mais s'executant pas à pas, il est donc possible de faire une faute de frappe et de se rendre compte que nous avons fait cette erreur-ci seulement trente minutes plus tard.
+Nous avons pu aussi aborder le concept important du javascript qu'est le "callback" énomément utilisé par exemple sur des serveurs utilisant des plateformes comme NodeJS.

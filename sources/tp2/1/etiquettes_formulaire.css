@@ -1,0 +1,73 @@
+* {
+    box-sizing: border-box; /* fix le dépassement des inputs de son conteneur*/
+}
+
+body {
+    background-color: #fafafa;
+}
+
+.section {
+    font-size: 18pt;
+    padding: 20px;
+}
+
+/* Customisation du conteneur du formulaire*/
+.container {
+    padding: 20px;
+}
+
+/* style pour le composant "card" */
+.card {
+    background-color: #ffffff;
+    margin: 1rem;
+    border-radius: 2px;
+}
+
+/* style pour l'élévation d'un conteneur */
+.elevation-2 {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); /* ajout d'ombre pour effet de 3D */
+}
+
+/*customisation des label */
+label {
+    padding: 12px 12px 12px 0; /* aération */
+    display: inline-block; /* affichage en block de ligne */
+    text-align: right; /* alignement du texte a droite */
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #905435; /*changer le style de la bordure de l'input*/
+    border-radius: 2px; /* arrondir l'input */
+    resize: vertical;
+}
+
+/* Comportement par defaut d'un element de largeur 25% de la page */
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+
+/* Comportement par defaut d'un element de largeur 75% de la page */
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+/* Nettoyage apres les lignes afin d'éviter les résidus et les dépassement de largeur*/
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Style pour les écrans de moins de 480px */
+@media screen and (max-width: 480px) {
+    .col-25, .col-75 {
+        width: 100%;
+        margin-top: 0;
+    }
+}
